@@ -1,47 +1,25 @@
-import express from 'express';
-import cors from 'cors';
+import fetch from 'node-fetch';
 
-const app = express();
-app.use(cors());
-app.use(express.json({ limit: '50mb' }));
+export default async function handler(req, res) {
+  const GAS_URL = 'https://script.google.com/macros/s/AKfycbw0Psv_nTLehuyW_v2x5w_HXby67eTNwCIhaEdsZweRrRER5DV-qc-Amyu_74tdzev9BQ/exec'; // ضع رابط GAS بعد نشره
 
-// رابط Google Apps Script الخاص بك
-const GAS_URL = 'https://script.google.com/macros/s/AKfycbznZmMlNzJdJ5X3ubvg2XnMt32xf8Qmy3vsaKmmbII5hvJaWUt-PLo7DfR6kx0sbkN0sg/exec';
+  try {
+    const response = await fetch(GAS_URL, {
+      method: req.method,
+      headers: {
+        ...req.headers,
+        host: undefined, // إزالة host لأن GAS يرفضه أحيانًا
+      },
+      body: req.method !== 'GET' && req.method !== 'HEAD' ? req.body : undefined,
+    });
 
-// endpoint الـ proxy
-app.post('/api/proxy', async (req, res) => {
-    try {
-        const { product, name, phone, images } = req.body;
+    const data = await response.text(); // نص كامل من GAS
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.status(200).send(data);
 
-        if (!product || !name || !phone) {
-            return res.status(400).json({ error: 'Missing required fields' });
-        }
-
-        // إرسال البيانات والصور إلى Google Apps Script
-        const payload = {
-            product,
-            name,
-            phone,
-            images: images || {}
-        };
-
-        const response = await fetch(GAS_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        });
-
-        const result = await response.json();
-        res.json({ success: true, gasResponse: result });
-    } catch (error) {
-        console.error('Proxy error:', error);
-        res.status(500).json({ error: 'Failed to process request', details: error.message });
-    }
-});
-
-// health check
-app.get('/api/health', (req, res) => {
-    res.json({ status: 'ok' });
-});
-
-export default app;
+  } catch (err) {
+    res.status(500).json({ status: 'error', message: err.message });
+  }
+}
