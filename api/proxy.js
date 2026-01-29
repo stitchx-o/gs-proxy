@@ -20,7 +20,7 @@ app.post('/api/proxy', upload.any(), async (req, res) => {
     });
   }
 
-  const url = 'https://script.google.com/macros/s/AKfycbwTb3XYdI8saKRdbXmGDImXhXzcoBbs1Do3PieTo4we8smYoPVQ2CkLpsEfnLMSdFO2QA/exec';
+  const url = 'https://script.google.com/macros/s/AKfycbxn95Mnp64j3pPs6WrZdRvbILjLsjkQabwUAqT7gQ88L4dBfuZPMqXOe-JsRMQrq_TWiA/exec';
 
   try {
     const response = await fetch(url, {
@@ -37,3 +37,4 @@ app.post('/api/proxy', upload.any(), async (req, res) => {
 
 
 export default app;
+
