@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 
 export default async function handler(req, res) {
-  const GAS_URL = 'https://script.google.com/macros/s/AKfycbw0Psv_nTLehuyW_v2x5w_HXby67eTNwCIhaEdsZweRrRER5DV-qc-Amyu_74tdzev9BQ/exec'; // ضع رابط GAS بعد نشره
+  const GAS_URL = 'https://script.google.com/macros/s/AKfycbyLPfguVJQxcH34C9WYhWZcdwb8n47wsZDa2dL4JzvIrk3Nbl-T0U1zpo08whE8bTufpw/exec'; // ضع رابط GAS بعد نشره
 
   try {
     const response = await fetch(GAS_URL, {
@@ -23,3 +23,4 @@ export default async function handler(req, res) {
     res.status(500).json({ status: 'error', message: err.message });
   }
 }
+
