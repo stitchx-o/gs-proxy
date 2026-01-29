@@ -1,9 +1,18 @@
 {
   "name": "gs-proxy",
   "version": "1.0.0",
-  "main": "api/proxy.js",
-  "license": "MIT",
+  "description": "Proxy server for uploading images to Google Drive via Google Apps Script",
+  "type": "module",
+  "main": "proxy.js",
+  "scripts": {
+    "start": "node proxy.js",
+    "dev": "node --watch proxy.js"
+  },
   "dependencies": {
-    "node-fetch": "^2.6.9"
+    "express": "^4.18.2",
+    "cors": "^2.8.5"
+  },
+  "engines": {
+    "node": "18.x"
   }
 }
