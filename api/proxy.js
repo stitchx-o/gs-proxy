@@ -6,7 +6,7 @@ app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 
 // رابط Google Apps Script الخاص بك
-const GAS_URL = 'https://script.google.com/macros/s/YOUR_GAS_DEPLOYMENT_ID/usercodeapp';
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbznZmMlNzJdJ5X3ubvg2XnMt32xf8Qmy3vsaKmmbII5hvJaWUt-PLo7DfR6kx0sbkN0sg/exec';
 
 // endpoint الـ proxy
 app.post('/api/proxy', async (req, res) => {
@@ -45,3 +45,4 @@ app.get('/api/health', (req, res) => {
 });
 
 export default app;
+
