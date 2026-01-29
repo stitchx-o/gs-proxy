@@ -1,14 +1,9 @@
 {
   "name": "gs-proxy",
   "version": "1.0.0",
-  "description": "Simple proxy to forward JSON to Google Apps Script",
-  "main": "proxy.js",
-  "scripts": {
-    "start": "node proxy.js"
-  },
+  "main": "api/proxy.js",
+  "license": "MIT",
   "dependencies": {
-    "express": "^4.18.2",
-    "node-fetch": "^2.6.7",
-    "body-parser": "^1.20.2"
+    "node-fetch": "^2.6.9"
   }
 }
